@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Photo Gallery</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/photogallery.css">
+  </head>
+
+  <body>
+    <form name="search-form" onsubmit="return findImages();">
+      Search: 
+      <input type="text" name="search">
+      <input type="submit" value="Submit">
+    </form>
+
+    <div class="photo-gallery" id="photos"></div>
+    
+    <div class="lightbox hide" id="lightbox">
+      <img src="" id='lightbox-image'></img>
+      <p id='lightbox-caption'></p>
+      <a class="prev" onclick="navigate(-1)">&#10094;</a>
+      <a class="next" onclick="navigate(1)">&#10095;</a>
+      <a class="close" onclick="closeLightbox()">&#8855;</a>
+    </div>
+    
+    <!-- Load JS files  -->
+    <script src="assets/js/photogallery.js"></script>
+  </body>
+</html>
