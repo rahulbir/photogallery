@@ -6,11 +6,13 @@ https://rahulbir.github.io/photogallery/
 
 
 ## Configurations
+#### Note: This is an optional step. You can just skip this and use my keys :) 
+
 You can change the required keys and configurations for Google Custom Search API and Google Search Engine in `photogallery.js`. Typically this would live on a server in a `.env` file for all configration keys. 
 
 These can be obtained at: 
-Google Search Engine: https://cse.google.com/
-Google API Manager: https://console.developers.google.com
+- Google Search Engine: https://cse.google.com/
+- Google API Manager: https://console.developers.google.com
 
 ```
   var googleApi = {
