@@ -1,9 +1,4 @@
 /* Global properties */
-.body {
-  margin: 0;
-  padding: 0;
-}
-
 .hide {
   visibility: hidden;
 }
@@ -85,11 +80,16 @@
   font-size: 17px;
 }
 
-.lightbox-container .prev, .lightbox-container .next, .lightbox-container .close {
+.lightbox-container .wrapper {
   position: fixed;
+  width: 100%;
+}
+
+.lightbox-container .wrapper .prev, .lightbox-container .wrapper .next, .lightbox-container .wrapper .close {
+  position: absolute;
   width: auto;
-  top: 50%;
-  margin: 10px;
+  top: 45%;
+  margin: 0 10px;
   padding: 10px;
   font-size: 20px;
   cursor: pointer;
@@ -97,15 +97,15 @@
   background-color: #000000;
 }
 
-.lightbox-container .prev {
+.lightbox-container .wrapper .prev {
   left: 0;
 }
 
-.lightbox-container .next {
+.lightbox-container .wrapper .next {
   right: 0;
 }
 
-.lightbox-container .close {
+.lightbox-container .wrapper .close {
   right: 0;
   top: 0;
   padding: 0;
@@ -113,6 +113,6 @@
   background-color: transparent;
 }
 
-.lightbox-container .prev:hover, .lightbox-container .next:hover, .lightbox-container .close:hover {
+.lightbox-container .wrapper .prev:hover, .lightbox-container .wrapper .next:hover, .lightbox-container .wrapper .close:hover {
   transform: scale(1.25);
 }
