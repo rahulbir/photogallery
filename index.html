@@ -2,24 +2,23 @@
 <html>
   <head>
     <title>Photo Gallery</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="assets/css/photogallery.css">
   </head>
 
   <body>
-    <form name="search-form" onsubmit="return findImages();">
-      Search: 
-      <input type="text" name="search">
-      <input type="submit" value="Submit">
-    </form>
+    <div class="container">
+      <h2 class="title">Photo Gallery</h2>
 
-    <div class="photo-gallery" id="photos"></div>
-    
-    <div class="lightbox hide" id="lightbox">
-      <img src="" id='lightbox-image'></img>
-      <p id='lightbox-caption'></p>
-      <a class="prev" onclick="navigate(-1)">&#10094;</a>
-      <a class="next" onclick="navigate(1)">&#10095;</a>
-      <a class="close" onclick="closeLightbox()">&#8855;</a>
+      <div class="gallery-container" id="photo-gallery"></div>
+      
+      <div class="lightbox-container hide" id="lightbox">
+        <img class="image" id="lightbox-image" src=""></img>
+        <p class="caption" id="lightbox-caption"></p>
+        <a class="prev" id='prev-lightbox-btn'>&#10094;</a>
+        <a class="next" id='next-lightbox-btn'>&#10095;</a>
+        <a class="close" id='close-lightbox-btn'>&#8855;</a>
+      </div>
     </div>
     
     <!-- Load JS files  -->

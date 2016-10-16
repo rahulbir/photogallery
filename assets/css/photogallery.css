@@ -8,56 +8,84 @@
   visibility: hidden;
 }
 
-/* Photo Gallery */
-.photo-gallery {
-  position: relative;
-  margin: 50px 0;
+.title {
+  text-align: center;
 }
 
-.photo-gallery .thumbnail {
+.spinner {
+  width: 15px;
+  height: 15px;
+  margin: 30% auto;
+  border: 5px solid #dddddd;
+  border-radius: 50%;
+  border-top: 5px solid #000000;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Photo Gallery */
+.gallery-container {
+  position: relative;
+  margin: 50px 0;
+  text-align: center;
+}
+
+.gallery-container .thumbnail {
   display: inline-block;
   width: 20%;
-  height: auto;
+  height: 200px;
   padding: 15px;
 }
 
-.photo-gallery .thumbnail img {
+.gallery-container .thumbnail img {
   width: 100%;
   height: 200px;
   display: block;
   cursor: pointer;
   overflow: hidden;
-  transition: transform .2s ease-in-out;
+  object-fit: cover;
+/*  transition: transform .2s ease-in-out;*/
 }
 
-.photo-gallery .thumbnail img:hover {
-  transform: scale(1.05);
+.gallery-container .thumbnail img:hover {
+  /*transform: scale(1.05);*/
 }
 
 /* Lightbox */
-.lightbox {
+.lightbox-container {
   position: fixed;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
   text-align: center;
-  z-index: 1000;
+  z-index: 100;
   background: rgba(0,0,0,0.8);
 }
 
-.lightbox img {
+.lightbox-container img {
   max-width: 80%;
+  min-height: 200px;
   max-height: 80%;
   margin-top: 3%;
 }
 
-.lightbox p {
+.lightbox-container p {
   color: #ffffff;
   font-size: 17px;
 }
 
-.lightbox .prev, .lightbox .next, .lightbox .close {
+.lightbox-container .prev, .lightbox-container .next, .lightbox-container .close {
   position: fixed;
   width: auto;
   top: 50%;
@@ -69,15 +97,15 @@
   background-color: #000000;
 }
 
-.lightbox .prev {
+.lightbox-container .prev {
   left: 0;
 }
 
-.lightbox .next {
+.lightbox-container .next {
   right: 0;
 }
 
-.lightbox .close {
+.lightbox-container .close {
   right: 0;
   top: 0;
   padding: 0;
@@ -85,6 +113,6 @@
   background-color: transparent;
 }
 
-.lightbox .prev:hover, .lightbox .next:hover, .lightbox .close:hover {
+.lightbox-container .prev:hover, .lightbox-container .next:hover, .lightbox-container .close:hover {
   transform: scale(1.25);
 }
