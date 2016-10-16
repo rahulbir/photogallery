@@ -14,7 +14,7 @@
   var imageCount = 0;             // total number of images created. Used to track id's of images.
   var googleApi = {               // config for Google Search API
     host:             'https://www.googleapis.com/customsearch/v1',
-    key:              'AIzaSyAW2x050HdS3inGI6gpNeeJRakJ0aQX6j4',
+    key:              'AIzaSyC5UFjAWHN4yMLOwxF76DHXVMVAsLpnzQM',
     searchEngineId:   '013872130897346659415:yae-br_hnby',
     imageSize:        'xxlarge',
     searchType:       'image',
