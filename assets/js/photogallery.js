@@ -34,7 +34,8 @@
    */
   function getImageData(search, page) {
     search = search ? search : 'wallpaper';
-    page = (page && (typeof page === 'integer')) ? page : 1;
+    page = (page && (typeof page === 'number')) ? page : 1;
+    
     var path = '?q=' + search + 
                '&cx=' + googleApi.searchEngineId +
                '&key=' + googleApi.key +
