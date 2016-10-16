@@ -14,7 +14,7 @@
   var imageCount = 0;             // total number of images created. Used to track id's of images.
   var googleApi = {               // config for Google Search API
     host:             'https://www.googleapis.com/customsearch/v1',
-    key:              'AIzaSyAFwXrSDLvjyqyZbLlZ_csNiCkDcsAHDeU',
+    key:              'AIzaSyAW2x050HdS3inGI6gpNeeJRakJ0aQX6j4',
     searchEngineId:   '013872130897346659415:yae-br_hnby',
     imageSize:        'xxlarge',
     searchType:       'image',
@@ -22,7 +22,7 @@
   };
 
   // on document load 
-  getImageData('wallpaper', 1);
+  getImageData('san+francisco', 1);
   getImageData('san+francisco', 2);
   initLightboxView();
 
@@ -63,7 +63,7 @@
 
     xhr.open('GET', `${googleApi.host}${path}`);
     xhr.send(null);
-  };
+  }
 
   /**
    * Create and initialize thumbnail with id
