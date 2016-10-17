@@ -28,10 +28,10 @@ These can be obtained at:
 Note: The free account for Google Search API only allows you to do 100 api calls per day.
 
 ## Supported and Tested Browsers
-- Google Chrome
-- Safari 
-- Firefox 
-- IE
+- Google Chrome 53.0
+- Safari 10.0
+- Firefox 49.0
+- IE 11.0
 
 ## Requirements
 - Create a webpage to show a grid of photo thumbnails.
