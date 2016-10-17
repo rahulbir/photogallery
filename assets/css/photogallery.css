@@ -69,9 +69,7 @@
 }
 
 .lightbox-container img {
-  max-width: 80%;
-  min-height: 200px;
-  max-height: 80%;
+  max-width: 60%;
   margin-top: 3%;
 }
 
@@ -107,7 +105,7 @@
 
 .lightbox-container .wrapper .close {
   right: 0;
-  top: 0;
+  top: 10px;
   padding: 0;
   font-size: 30px;
   background-color: transparent;

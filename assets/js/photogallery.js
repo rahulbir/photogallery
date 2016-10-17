@@ -1,18 +1,15 @@
-(function() {
+(() => {
   // dom elements 
-  var photoGallery     =  document.getElementById('photo-gallery');
-  var lightbox         =  document.getElementById('lightbox');
-  var lightboxImage    =  document.getElementById('lightbox-image');
-  var lightboxCaption  =  document.getElementById('lightbox-caption');
-  var lightboxPrevBtn  =  document.getElementById('prev-lightbox-btn');
-  var lightboxNextBtn  =  document.getElementById('next-lightbox-btn');
-  var lightboxCloseBtn =  document.getElementById('close-lightbox-btn');
-  
-  // global variables
-  var images = [];                // meta data for images obtained from Google Search API
-  var currentLightboxIndex = 0;   // index of the current image displayed in the lightbox
-  var imageCount = 0;             // total number of images created. Used to track id's of images.
-  var googleApi = {               // config for Google Search API
+  const photoGallery     =  document.getElementById('photo-gallery');
+  const lightbox         =  document.getElementById('lightbox');
+  const lightboxImage    =  document.getElementById('lightbox-image');
+  const lightboxCaption  =  document.getElementById('lightbox-caption');
+  const lightboxPrevBtn  =  document.getElementById('prev-lightbox-btn');
+  const lightboxNextBtn  =  document.getElementById('next-lightbox-btn');
+  const lightboxCloseBtn =  document.getElementById('close-lightbox-btn');
+
+  // configurations
+  const googleApi = {
     host:             'https://www.googleapis.com/customsearch/v1',
     key:              'AIzaSyC5UFjAWHN4yMLOwxF76DHXVMVAsLpnzQM',
     searchEngineId:   '013872130897346659415:yae-br_hnby',
@@ -20,11 +17,11 @@
     searchType:       'image',
     num:              '10'
   };
-
-  // on document load 
-  getImageData('san+francisco', 1);
-  getImageData('san+francisco', 2);
-  initLightboxView();
+  
+  // global variables
+  let images = [];                // meta data for images obtained from Google Search API
+  let currentLightboxIndex = 0;   // index of the current image displayed in the lightbox
+  let imageCount = 0;             // total number of images created. Used to track id's of images.
 
   /**
    * Retrieve images from Google Search API asynchronously and initializes each image
@@ -32,11 +29,11 @@
    * @param  {String} search    'Wallpaper'
    * @param  {Integer} page     defaults to 1
    */
-  function getImageData(search, page) {
+  const getImageData = (search, page) => {
     search = search ? search : 'wallpaper';
     page = (page && (typeof page === 'number')) ? page : 1;
     
-    var path = '?q=' + search + 
+    const path = '?q=' + search + 
                '&cx=' + googleApi.searchEngineId +
                '&key=' + googleApi.key +
                '&imgSize=' + googleApi.imageSize +
@@ -44,13 +41,13 @@
                '&num=' + googleApi.num + 
                '&start=' + page;
 
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function(e) {
-      if (xhr.readyState === 4 && xhr.status === 200) {
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = (e) => {
+      if(xhr.readyState === 4 && xhr.status === 200) {
         response = JSON.parse(xhr.responseText);
         images = images.concat(response.items);
 
-        response.items.map(function(image) {
+        response.items.map(image => {
           initThumbnail(imageCount);
           initImage(image, imageCount);
           imageCount++;
@@ -58,25 +55,23 @@
       }
     };
 
-    xhr.onerror = function (e) {
-      console.error(xhr.statusText);
-    };
+    xhr.onerror = (e) => console.error(xhr.statusText);
 
     xhr.open('GET', `${googleApi.host}${path}`);
     xhr.send(null);
-  }
+  };
 
   /**
    * Create and initialize thumbnail with id
    *
    * @param  {Integer} id       id of the image associated with this thumbnail
    */
-  function initThumbnail(id) {    
+  const initThumbnail = (id) => {    
     var thumbnail = document.createElement('div');
     thumbnail.className = 'thumbnail';
     thumbnail.setAttribute('data-id', id);
     photoGallery.appendChild(thumbnail);
-  }
+  };
 
   /**
    * Create, initialize, and preload images. 
@@ -87,98 +82,93 @@
    * @param  {Object} image     image meta data from google search api
    * @param  {Integer} id       id of the image
    */
-  function initImage(image, id) {
-    var thumbnail = document.querySelector('.thumbnail[data-id="' + id + '"]');
+  const initImage = (image, id) => {
+    const thumbnail = document.querySelector('.thumbnail[data-id="' + id + '"]');
     startSpinner(thumbnail);
 
-    var imageContainer = new Image();
+    let imageContainer = new Image();
     
-    imageContainer.onload = function() {
+    imageContainer.onload = () => {
       thumbnail.appendChild(imageContainer);
       stopSpinner(thumbnail);
     }
 
     imageContainer.src = image.link;
-    imageContainer.onclick = function() {
-      displayLightboxView(id);
-    };
-  }
+    imageContainer.onclick = () => displayLightboxView(id);
+  };
 
-  function initLightboxView() {
-    lightboxPrevBtn.onclick = function() {
-      navigateLightbox(-1);
-    };
-
-    lightboxNextBtn.onclick = function() {
-      navigateLightbox(1);
-    };
-
-    lightboxCloseBtn.onclick = function() {
-      closeLightbox();
-    };
-  }
+  const initLightboxView = () => {
+    lightboxPrevBtn.onclick = () => navigateLightbox(-1);
+    lightboxNextBtn.onclick = () => navigateLightbox(1);
+    lightboxCloseBtn.onclick = () => closeLightbox();
+  };
 
   /**
    * Displays clicked image thumbnail in lightbox view
    *
    * @param  {Integer} index
    */
-  function displayLightboxView(index) {
+  const displayLightboxView = (index) => {
     currentLightboxIndex = index; 
     lightbox.classList.remove('hide');
     lightboxImage.src = images[index].link;
     lightboxCaption.innerHTML = images[index].title;
-  }
+  };
 
   /**
    * Changes the lightbox image to the next or previous image in the photo-gallery list
    *
    * @param  {Integer} direction     -1 for previos, 1 for next
    */
-  function navigateLightbox(direction) {
+  const navigateLightbox = (direction) => {
     if(direction !== -1 && direction !== 1) { return; }
 
     lightboxImage.src = '';
 
     currentLightboxIndex += direction;
-    if (currentLightboxIndex > images.length - 1) { currentLightboxIndex = 0; }
-    if (currentLightboxIndex < 0) { currentLightboxIndex = images.length - 1; }
+    if(currentLightboxIndex > images.length - 1) { currentLightboxIndex = 0; }
+    if(currentLightboxIndex < 0) { currentLightboxIndex = images.length - 1; }
 
     displayLightboxView(currentLightboxIndex);
-  }
+  };
 
   /**
    * Closes the lightbox view
    */
-  function closeLightbox() {
+  const closeLightbox = () => {
     lightbox.classList.add('hide');
     lightboxImage.src = '';
     lightboxCaption.innerHTML = '';
-  }
+  };
 
   /**
    * Adds a loading spinner to target element 
    *
    * @param  {document.Element} targetElement
    */
-  function startSpinner(targetElement) {
+  const startSpinner = (targetElement) => {
     if(!targetElement) { return; }
 
     var spinner = document.createElement('div');
     spinner.className = 'spinner';
 
     targetElement.appendChild(spinner);
-  }
+  };
 
   /**
    * Stops a loading spinner on a target element 
    *
    * @param  {document.Element} targetElement
    */
-  function stopSpinner(targetElement) {
+  const stopSpinner = (targetElement) => {
     if(!targetElement) { return; }
 
     var spinner = document.querySelector('.thumbnail[data-id="' + targetElement.getAttribute('data-id') + '"] div.spinner');
     targetElement.removeChild(spinner);
-  }
+  };
+
+  // on document load fetch 20 images asynchronously and display them on screen
+  getImageData('san+francisco', 1);
+  getImageData('san+francisco', 2);
+  initLightboxView();
 })();
