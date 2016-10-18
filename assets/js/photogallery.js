@@ -11,7 +11,7 @@
   // configurations
   const googleApi = {
     host:             'https://www.googleapis.com/customsearch/v1',
-    key:              'AIzaSyC5UFjAWHN4yMLOwxF76DHXVMVAsLpnzQM',
+    key:              'AIzaSyAFwXrSDLvjyqyZbLlZ_csNiCkDcsAHDeU',
     searchEngineId:   '013872130897346659415:yae-br_hnby',
     imageSize:        'xxlarge',
     searchType:       'image',
